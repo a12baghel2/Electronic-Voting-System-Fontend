@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button'
+import {Link} from 'react-router-dom';
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -13,7 +14,8 @@ export default function SignUp() {
   const [permanentAdress, setPermanentAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(0);
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const obj = {
       name: name,
       username: username,
@@ -35,8 +37,8 @@ export default function SignUp() {
   }
 
   return (
-    <div style ={style} >
-      <Form>
+    <div style={style}>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className='mb-3' controlId='formGridName'>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -84,7 +86,7 @@ export default function SignUp() {
             <Form.Label>Gender</Form.Label>
             <Form.Select
               defaultValue='Select'
-              onChange={(e) => setGender(e.target.value)}>
+              onSelect={(e) => setGender(e.target.value)}>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>
@@ -100,9 +102,18 @@ export default function SignUp() {
             />
           </Form.Group>
         </Row>
-        <Button variant='outline-success' type='submit' onSubmit={handleClick}>
-          Submit
+        <Button variant='outline-success' type='submit'>
+          Register
         </Button>
+        <p></p>
+        <Link to='/login'>
+          <Button
+            variant='outline-info'
+            type='submit'
+          >
+            Login
+          </Button>
+        </Link>
       </Form>
     </div>
   );

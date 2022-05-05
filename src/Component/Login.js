@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(username, password);
   }
 
@@ -22,7 +24,7 @@ export default function Login() {
 
   return (
     <div style={style}>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row className='mb-3'>
           <Form.Group as={Col} controlId='formGridEmail'>
             <Form.Label>Email</Form.Label>
@@ -42,9 +44,15 @@ export default function Login() {
             />
           </Form.Group>
         </Row>
-        <Button variant='outline-success' type='submit' onSubmit={handleSubmit}>
+        <Button variant='outline-success' type='submit'>
           Login
         </Button>
+        <p> </p>
+        <Link to='/signup'>
+          <Button variant='outline-info' type='submit'>
+            SignUp
+          </Button>
+        </Link>
       </Form>
     </div>
   );
