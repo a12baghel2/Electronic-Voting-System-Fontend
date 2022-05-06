@@ -1,10 +1,19 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import {Link} from 'react-router-dom'
 
 function PendingVoterId() {
+  const style = {
+    width: "100%",
+    paddingLeft: 200,
+    paddingRight: 200,
+    paddingTop: 30,
+    paddingBottom: 30,
+  };
+
   return (
-    <div className="justify-content-center align-items-center">
+    <div className='justify-content-center align-items-center' style={style}>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -56,6 +65,11 @@ function PendingVoterId() {
           </tr>
         </tbody>
       </Table>
+      <Link to='/admin'>
+        <Button variant='outline-primary' type='submit'>
+          Go Home
+        </Button>
+      </Link>
     </div>
   );
 }

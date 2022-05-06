@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Electronic Voting system
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend of the Electronic Voting System the backend of this project is [here](https://github.com/a12baghel2/Electronic-Voting-System-backend)
 
 ## Available Scripts
 

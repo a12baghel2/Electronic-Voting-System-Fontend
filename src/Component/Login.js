@@ -15,7 +15,7 @@ export default function Login() {
   }
 
   const style = {
-    width: "80%",
+    width: "100%",
     paddingLeft: 100,
     paddingRight: 200,
     paddingTop: 30,
@@ -49,7 +49,7 @@ export default function Login() {
         </Button>
         <p> </p>
         <Link to='/signup'>
-          <Button variant='outline-info' type='submit'>
+          <Button variant='outline-primary' type='submit'>
             SignUp
           </Button>
         </Link>

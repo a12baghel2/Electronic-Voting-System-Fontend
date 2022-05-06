@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button'
-import {Link} from 'react-router-dom';
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -29,12 +29,12 @@ export default function SignUp() {
   };
 
   const style = {
-    width : "80%",
-    paddingLeft : 100,
-    paddingRight : 200,
-    paddingTop : 30,
-    paddingBottom : 30,
-  }
+    width: "100%",
+    paddingLeft: 100,
+    paddingRight: 200,
+    paddingTop: 30,
+    paddingBottom: 30,
+  };
 
   return (
     <div style={style}>
@@ -84,9 +84,7 @@ export default function SignUp() {
         <Row className='mb-3'>
           <Form.Group as={Col} controlId='formGridGender'>
             <Form.Label>Gender</Form.Label>
-            <Form.Select
-              defaultValue='Select'
-              onSelect={(e) => setGender(e.target.value)}>
+            <Form.Select onClick={(e) => setGender(e.target.value)}>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>
@@ -107,10 +105,7 @@ export default function SignUp() {
         </Button>
         <p></p>
         <Link to='/login'>
-          <Button
-            variant='outline-info'
-            type='submit'
-          >
+          <Button variant='outline-primary' type='submit'>
             Login
           </Button>
         </Link>
@@ -119,17 +114,3 @@ export default function SignUp() {
   );
 }
 
-/*
-
-> For Registrtion we need : 
-* Name 
-* Username (E-mail)
-* Password
-* Role (to be setted to USER by default)
-* Date of Birth
-* Gender
-* Present Address
-* Permanent Address
-* Phone Number 
-
-*/
