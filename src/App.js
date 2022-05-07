@@ -9,6 +9,7 @@ import Election from './Component/Election';
 import Home from './Component/Home';
 import Result from './Component/Result'
 import PendingVoterId from "./Component/PendingVoterId";
+import User from './Component/User'
 import { BrowserRouter, Route,  Routes} from "react-router-dom";
 
 
@@ -19,6 +20,7 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path='/' element={<Home />}></Route>
+          <Route exact path='/user' element={<User />}></Route>
           <Route exact path='/result' element={<Result />}></Route>
           <Route exact path='/admin' element={<Admin />}></Route>
           <Route exact path='/signup' element={<SignUp />}></Route>
