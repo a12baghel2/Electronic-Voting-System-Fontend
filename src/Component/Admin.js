@@ -51,9 +51,15 @@ function Admin() {
             Accept/Reject Pending Request
           </Button>
         </Link>
-        <Button className='mt-2' variant='outline-danger' type='submit'>
-          View/Declare Result
-        </Button>
+        <Link to='/result'>
+          <Button
+            className='mt-2'
+            style={{ width: "100%" }}
+            variant='outline-danger'
+            type='submit'>
+            View/Declare Result
+          </Button>
+        </Link>
       </Row>
     </Container>
   );

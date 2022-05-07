@@ -7,6 +7,7 @@ import PartyDetail from './Component/PartyDetail';
 import Candidate from './Component/Candidate';
 import Election from './Component/Election';
 import Home from './Component/Home';
+import Result from './Component/Result'
 import PendingVoterId from "./Component/PendingVoterId";
 import { BrowserRouter, Route,  Routes} from "react-router-dom";
 
@@ -18,6 +19,7 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path='/' element={<Home />}></Route>
+          <Route exact path='/result' element={<Result />}></Route>
           <Route exact path='/admin' element={<Admin />}></Route>
           <Route exact path='/signup' element={<SignUp />}></Route>
           <Route exact path='/login' element={<Login />}></Route>
