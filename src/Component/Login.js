@@ -2,28 +2,36 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+// import { Redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(props.obj);
     console.log(username, password);
-  }
-
-  const style = {
-    width: "100%",
-    paddingLeft: 100,
-    paddingRight: 200,
-    paddingTop: 30,
-    paddingBottom: 30,
+    if (username === props.obj.username && password === props.obj.password) {
+      navigate("/admin");
+    }
   };
 
+  // const style = {
+  //   width: "100%",
+  //   paddingLeft: 100,
+  //   paddingRight: 200,
+  //   paddingTop: 30,
+  //   paddingBottom: 30,
+  // };
+
   return (
-    <div style={style}>
+    <Container>
       <Form onSubmit={handleSubmit}>
         <Row className='mb-3'>
           <Form.Group as={Col} controlId='formGridEmail'>
@@ -54,6 +62,6 @@ export default function Login() {
           </Button>
         </Link>
       </Form>
-    </div>
+    </Container>
   );
 }

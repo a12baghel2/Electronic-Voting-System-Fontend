@@ -33,7 +33,7 @@ function PartyDetail() {
 
 
   return (
-    <div class="align-items-center" style={style}>
+    <div className="align-items-center" style={style}>
       <Form onSubmit={handleSubmit}>
         <Row className='mb-3'>
           <Form.Group as={Col} controlId='formGridEmail'>
