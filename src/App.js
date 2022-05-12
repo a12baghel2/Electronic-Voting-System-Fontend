@@ -14,7 +14,14 @@ import { BrowserRouter, Route,  Routes} from "react-router-dom";
 
 const obj = {
   username : "a12baghel2@gmail.com",
-  password : "abhi123"
+  password : "abhi123",
+  role : "admin"
+}
+
+const obj2 = {
+  username : "abhimanyu.57@wipro.com",
+  password : "abhi123",
+  role : "user"
 }
 
 function App() {
@@ -28,7 +35,7 @@ function App() {
           <Route exact path='/result' element={<Result />}></Route>
           <Route exact path='/admin' element={<Admin />}></Route>
           <Route exact path='/signup' element={<SignUp />}></Route>
-          <Route exact path='/login' element={<Login obj={obj} />}></Route>
+          <Route exact path='/login' element={<Login obj={obj2} />}></Route>
           <Route exact path='/addparty' element={<PartyDetail />}></Route>
           <Route exact path='/addcandidate' element={<Candidate />}></Route>
           <Route exact path='/addelection' element={<Election />}></Route>

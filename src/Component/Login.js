@@ -1,34 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-// import { Redirect } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../Context/AuthProvider";
+import axios from "../Api/axios";
+
+const LOGIN_URL = "/authenticate";
+
+function parseJwt(token) {
+  // Split the token and taken the second
+  const base64Url = token.split(".")[1];
+  return JSON.parse(window.atob(base64Url));
+}
+
+
+
 
 export default function Login(props) {
+  const userRef = useRef();
+  const errRef = useRef();
+  const { setAuth } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [username, password]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(props.obj);
+
     console.log(username, password);
-    if (username === props.obj.username && password === props.obj.password) {
-      navigate("/admin");
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ username, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: false,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      //console.log(JSON.stringify(response));
+      const accessToken = response?.data?.token;
+      const data = parseJwt(accessToken);
+      console.log(data.isUser);
+      //setAuth({ username, password, roles, accessToken });
+      setUsername("");
+      setPassword("");
+      if(data.isUser){
+        navigate('/user')
+      }else{
+        navigate("/admin");
+      }
+      
+    } catch (err) {
+      console.log(err);
     }
   };
-
-  // const style = {
-  //   width: "100%",
-  //   paddingLeft: 100,
-  //   paddingRight: 200,
-  //   paddingTop: 30,
-  //   paddingBottom: 30,
-  // };
 
   return (
     <Container>
