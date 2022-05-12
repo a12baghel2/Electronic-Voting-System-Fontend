@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../Context/AuthProvider";
+//import AuthContext from "../Context/AuthProvider";
 import axios from "../Api/axios";
 
 const LOGIN_URL = "/authenticate";
@@ -20,9 +20,9 @@ function parseJwt(token) {
 
 
 export default function Login(props) {
-  const userRef = useRef();
-  const errRef = useRef();
-  const { setAuth } = useContext(AuthContext);
+  //const userRef = useRef();
+  //const errRef = useRef();
+  //const { setAuth } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
