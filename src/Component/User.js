@@ -2,19 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import useAuth from '../Hooks/useAuth'
 
 function User() {
-  const user = {
-    name: "Abhimanyu",
-    gender: "male",
-    dob: "22/06/2001",
-    address: "Faridabad",
-    phone: "9650140730",
-    usernme: "a12baghel2@gmail.com",
-  };
-
+  const {auth} = useAuth();
   const handleClick = () => {
-    console.log(user);
+    console.log(auth);
   };
 
   return (

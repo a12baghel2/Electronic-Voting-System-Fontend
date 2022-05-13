@@ -3,29 +3,51 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from '../Api/axios';
+
+const SIGNUP_URL = '/register';
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+  const [dob, setDob] = useState(Date);
   const [presentAddress, setPresentAddress] = useState("");
   const [permanentAdress, setPermanentAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(0);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const obj = {
       name: name,
       username: username,
       password: password,
       gender: gender,
+      dob : dob,
+      role : "USER",
       presentAddresss: presentAddress,
       permanentAddress: permanentAdress,
       phoneNumber: phoneNumber,
     };
     console.log(obj);
+    try{
+      const response = await axios.post(
+        SIGNUP_URL,
+        JSON.stringify(obj),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: false,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      navigate('/login');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const style = {
@@ -89,6 +111,15 @@ export default function SignUp() {
               <option>Female</option>
               <option>Other</option>
             </Form.Select>
+          </Form.Group>
+
+          <Form.Group as={Col} controlId='formGridDob'>
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
+              type='date'
+              placeholder=''
+              onChange={(e) => setDob(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId='formGridZip'>

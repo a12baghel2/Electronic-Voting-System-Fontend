@@ -5,8 +5,8 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
-//import AuthContext from "../Context/AuthProvider";
 import axios from "../Api/axios";
+import useAuth from '../Hooks/useAuth'
 
 const LOGIN_URL = "/authenticate";
 
@@ -16,22 +16,13 @@ function parseJwt(token) {
   return JSON.parse(window.atob(base64Url));
 }
 
-
-
-
-export default function Login(props) {
-  //const userRef = useRef();
-  //const errRef = useRef();
-  //const { setAuth } = useContext(AuthContext);
+export default function Login() {
+  const { setAuth } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
 
   useEffect(() => {
     setErrMsg("");
@@ -51,11 +42,10 @@ export default function Login(props) {
         }
       );
       console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
       const accessToken = response?.data?.token;
       const data = parseJwt(accessToken);
-      console.log(data.isUser);
-      //setAuth({ username, password, roles, accessToken });
+      const role = data.isUser ? "USER" : "ADMIN";
+      setAuth({ username, password, role, accessToken });
       setUsername("");
       setPassword("");
       if(data.isUser){
@@ -65,7 +55,16 @@ export default function Login(props) {
       }
       
     } catch (err) {
-      console.log(err);
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      console.log(errMsg);
     }
   };
 
